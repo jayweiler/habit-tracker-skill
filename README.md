@@ -62,6 +62,20 @@ The skill is pure instructions — no code to execute, no dependencies to instal
 
 The AI does all the work. The skill just makes sure it does it correctly and consistently.
 
+## Continuous Improvement
+
+The skill self-documents its own issues. When something goes wrong during a check-in (wrong schedule, bad streak calculation, awkward flow), the AI logs a one-liner to a `skill-issues.md` file in your workspace — then moves on without interrupting the session. Issues accumulate and get fixed in batched improvement sessions, not mid-workflow.
+
+To make this work across sessions (including when the skill isn't actively loaded), add a line to your `CLAUDE.md` or system instructions:
+
+```
+When a skill does something wrong (bad trigger, missing step, incorrect output),
+log a one-liner to the skill's issues file. Don't stop the session to fix it.
+Issues file for habit tracker: tools/habit-skill-issues.md
+```
+
+This ensures friction gets captured even if the skill has already unloaded from context.
+
 ## File Structure
 
 ```

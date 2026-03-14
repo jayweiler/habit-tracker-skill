@@ -18,6 +18,7 @@ timezone: "America/Los_Angeles"    # IANA timezone (e.g., "America/New_York", "E
 log_file: "habit-log.json"                # Active log (recent entries)
 log_archive: "habit-log-archive.json"     # Archived entries (older than retention_days)
 retention_days: 30                        # Days to keep in active log
+issues_file: "skill-issues.md"           # Where skill friction gets logged for later improvement
 
 # =====================================================================
 # [HABITS] — Define your habits here

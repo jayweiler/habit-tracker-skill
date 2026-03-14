@@ -250,6 +250,37 @@ This skill is designed for minimal context consumption:
 
 ---
 
+## Continuous Improvement
+
+This skill is actively developed. During any session where the skill is running, watch for friction — things that feel wrong, take too long, produce bad results, or don't match the user's expectations.
+
+### Issue Capture Protocol
+
+When you notice a problem during a check-in or habit-related interaction:
+
+1. **Don't stop the session to fix it.** Finish the check-in or habit task first.
+2. **Log the issue.** Append a one-liner to the issues file (configured in `issues_file`, defaults to `skill-issues.md` next to the config). Format:
+   ```
+   - YYYY-MM-DD: [brief description of what went wrong or felt off]
+   ```
+3. **Move on.** The issue will be addressed in a dedicated skill improvement session, not mid-workflow.
+
+### What Counts as an Issue
+
+- Check-in protocol asked about a habit on the wrong day (schedule bug)
+- Streak calculation produced an incorrect or confusing result
+- Config schema was missing a field the user needed
+- The skill triggered when it shouldn't have, or didn't trigger when it should have
+- A habit ID mismatch between config and log (normalization gap)
+- The check-in felt too slow, too repetitive, or too rigid
+- Any moment where the user had to correct the skill's behavior
+
+### Improvement Cycle
+
+Issues accumulate in the issues file. In a dedicated session (not during a check-in), review them, make changes to the skill, and clear resolved issues. If the skill is published as a repo, batch improvements into a version bump.
+
+---
+
 ## Context Compaction Recovery
 
 If context compaction occurs during a session where habits were being discussed:
