@@ -47,6 +47,7 @@ Once set up, the skill triggers on natural language:
 - **Flexible scheduling** — daily, weekdays, weekends, or specific days
 - **Routine grouping** — group related habits (e.g., "evening routine")
 - **Streak tracking** — with schedule-aware calculation and visual grids
+- **Visual dashboard** — on-demand HTML habit dashboard with contribution grids, streak counts, and category grouping (say "show me my habits" or "habit dashboard")
 - **Automatic log maintenance** — 30-day retention with archival
 - **Context efficient** — loads on-demand, not every session
 

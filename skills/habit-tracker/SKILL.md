@@ -211,6 +211,35 @@ Dishwash: ■ ■ □ ■ ■ ▪ ■ ■ □ ■ ■ ■ □ ■  (10/14, 1 cov
 
 Legend: ■ = done, □ = missed, ▪ = covered, · = not scheduled
 
+### Visual Dashboard
+
+When the user asks to *see* their habits ("show me my habits," "habit dashboard," "visualize my streaks"), generate an interactive HTML file. The text grid above is for inline check-in summaries; the dashboard is for deeper review.
+
+**How to build it:**
+
+1. Read `habit-config.yaml` for habit definitions, categories, schedules, and routines.
+2. Read the log file for the last 14–30 days of data (user can request a different range).
+3. Generate a single self-contained HTML file (inline CSS + JS, no external dependencies) and save it to the user's workspace.
+
+**Dashboard requirements:**
+
+- **Dark theme** — `#0d1117` background, GitHub-style color palette (green for done, blue for covered, dark gray for missed, dashed border for unlogged, subtle dot for not-scheduled).
+- **Summary bar** at top — completion rate (done / scheduled days), total days logged, best current streak, covered count.
+- **Category grouping** — habits grouped under category headers matching the config.
+- **Contribution grid** — one row per habit, one cell per day. Each cell is a small colored square. Cells show a tooltip on hover with the date and status.
+- **Schedule-aware rendering** — don't show a "missed" cell on a day the habit wasn't scheduled. Show it as "not scheduled" (distinct from unlogged).
+- **Stats column** — `done/total` count to the right of each row. If there are covered days, show them separately (e.g., `4/7 +1c`).
+- **Streak column** — current streak count to the right of stats. Green if active, gray if broken (0).
+- **Routine aggregation** — if the config defines routines, show a summary row for each routine below its member habits. A routine day is "complete" if all member habits are done, "partial" if some are, "missed" if none are.
+
+**What NOT to do:**
+
+- Don't hardcode habit names, IDs, or categories. Read everything from the config.
+- Don't use external CDNs, fonts, or scripts. The file must work offline.
+- Don't include localStorage or sessionStorage. All data comes from the files.
+
+**Example trigger phrases:** "show me my habits," "habit dashboard," "how am I doing on habits," "visualize streaks," "habit report."
+
 ---
 
 ## First-Time Setup
@@ -237,7 +266,7 @@ The habit tracker is designed to work standalone, but it plays well with:
 
 - **Daily planning sessions** — Run the check-in as step 1 of morning planning. The skill handles the flow; the planning system just needs to trigger it.
 - **Evening reviews** — Run the check-in as a gate before closing the day. If habits haven't been logged, the skill catches it.
-- **Daily cards / dashboards** — The `habit-log.json` file is machine-readable. Any visualization system can read it directly. The skill doesn't own rendering — it owns data.
+- **Daily cards / dashboards** — The `habit-log.json` file is machine-readable. The skill generates its own HTML dashboard on demand (see [Visual Dashboard](#visual-dashboard)), but external visualization systems can also read the log directly.
 - **Coaching systems** — The streak data can feed into motivational systems. The skill reports streaks; what you do with that information is up to the broader system.
 
 ### Context Efficiency
